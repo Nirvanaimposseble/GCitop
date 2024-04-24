@@ -19059,7 +19059,7 @@ a.text-dark:hover, a.text-dark:focus {
   .table, .jsgrid .jsgrid-table {
     border-collapse: collapse !important;
   }
-  
+
   .table td,
   .jsgrid .jsgrid-table td, .table th, .jsgrid .jsgrid-table th {
     background-color: #ffffff !important;
@@ -22097,6 +22097,34 @@ code {
 .card.card-light-blue {
   background: #7978E9;
   color: #ffffff;
+}
+.card.card-light-success {
+  background: #16FF00;
+  color: #ffffff;
+}
+.card.card-light-success:hover {
+  background: #5dfc4b;
+}
+
+.card.card-dark-success {
+  background: #357C3C;
+  color: #ffffff;
+}
+
+.card.card-light-warning {
+  background: #FFF455;
+  color: #ffffff;
+}
+.card.card-light-warning:hover {
+  background: #FFF400;
+}
+
+.card.card-dark-warning {
+    background: #FFC700;
+    color: #ffffff;
+}
+.card.card-dark-warning:hover {
+  background: #ffd800;
 }
 
 .card.card-light-blue:hover {

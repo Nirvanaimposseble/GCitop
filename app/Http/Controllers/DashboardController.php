@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Ticket;
 
 class DashboardController extends Controller
 {
@@ -13,7 +14,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        
+        $total_ticket = Ticket::count();
+        $proses = Ticket::where('status','=','On Proccess')->count();
+        $pending = Ticket::where('status','=','Pending')->count();
+        $beres = Ticket::where('status','=','Finished')->count();
+        return view('home.dashboard',compact('total_ticket','beres','pending','proses'));
     }
 
     /**

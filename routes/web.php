@@ -11,6 +11,7 @@ use App\Http\Controllers\SubkategoriController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 Use App\Http\Controllers\LoginController;
+Use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +33,11 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 // Authenticated Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home.dashboard');
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('home.dashboard');
+    // });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+
 
     // Asset Routes
     Route::resource('asset', AssetController::class)->except(['show']);
