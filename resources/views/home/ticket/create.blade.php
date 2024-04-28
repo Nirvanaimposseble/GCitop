@@ -93,12 +93,19 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Lokasi</label>
                                 <div class="col-md-8">
-                                    <select name="lokasi_id" class="form-control">
+                                    <select name="lokasi_id" class="form-control @error('lokasi_id')
+                                        is-invalid
+                                    @enderror">
                                         <option value="" selected disabled>Choose...</option>
                                         @foreach ($lokasi as $lok)
                                             <option value="{{$lok->id}}">{{$lok->nama_lokasi}}</option>
                                         @endforeach
                                     </select>
+                                    @error('lokasi_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -128,11 +135,18 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Detail ticket :</label>
                                 <div class="col-md-12 mb-4">
-                                    <textarea name="detail_kendala" class="form-control @error('detail_kendala') is-invalid @enderror" rows="3"></textarea>
-                                    @error('detail_ticket')
+                                    <textarea name="detail_kendala" class="form-control @error('detail_kendala') is-invalid @enderror" rows="3">{{ old('detail_kendala') }}</textarea>
+                                    @error('detail_kendala')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                @error('detail_kendala')
+                                    <div class="col-md-12">
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>

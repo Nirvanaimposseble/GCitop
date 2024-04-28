@@ -64,6 +64,7 @@ class TicketController extends Controller
             'client_id'       => 'required|exists:clients,id',
             'asset_id'        => 'required|exists:assets,id',
             'ticket_for'      => 'required|in:Information Technology,Inventory Control,Manufaktur Engineering,Divisi Sipil',
+            'detail_kendala'    => 'required',
         ], [
             'kendala.required'          => 'Kolom kendala tidak boleh kosong!',
             'kendala.string'            => 'Kolom kendala harus berupa teks!',
@@ -79,6 +80,7 @@ class TicketController extends Controller
             'asset_id.exists'           => 'Aset yang dipilih tidak valid!',
             'ticket_for.required'       => 'Kolom tidak boleh kosong!',
             'ticket_for.in'             => 'Pilihan column tidak valid!',
+            'detail_kendala.required' => 'Kolom tidak boleh kosong!'
         ]);
         Ticket::create([
             'kendala'                => $request->kendala,

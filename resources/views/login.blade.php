@@ -27,7 +27,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="/assets/images/logo.svg" alt="logo">
+                <img src="/assets/images/nicee.png" alt="logo">
               </div>
                 <h4>Hello! let's get started</h4>
                 <div>
@@ -45,7 +45,7 @@
                     <div class="mt-3">
                         <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">LOG IN</button>
                     </div>
-                    <div class="my-2 d-flex justify-content-between align-items-center">
+                    {{-- <div class="my-2 d-flex justify-content-between align-items-center">
                         <div class="form-check">
                             <label class="form-check-label text-muted">
                                 <input type="checkbox" class="form-check-input">
@@ -53,7 +53,7 @@
                             </label>
                         </div>
                         <a href="#" class="auth-link text-black">Lupa Password ?</a>
-                    </div>
+                    </div> --}}
 
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                     <script>

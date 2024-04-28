@@ -126,20 +126,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Detail Kendala :</label>
-                                <div class="col-md-8">
-                                    <textarea name="detail_kendala" class="form-control @error('detail_kendala') is-invalid @enderror" placeholder="Masukkan detail kendala..." rows="4" cols="50">{{ old('detail_kendala', $ticket->detail_kendala ?? '') }}</textarea>
-                                    @error('detail_kendala')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">Detail ticket :</label>
+                        <div class="col-md-12 mb-4">
+                            <textarea name="detail_kendala" class="form-control @error('detail_kendala') is-invalid @enderror" rows="3">{{ old('detail_kendala') }}{{ old('detail_kendala', $ticket->detail_kendala ?? '') }}</textarea>
+                            @error('detail_kendala')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        @error('detail_kendala')
+                            <div class="col-md-12">
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
                             </div>
-                        </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                     <a href="{{ route('ticket.index') }}" type="button" class="btn btn-light">Kembali</a>

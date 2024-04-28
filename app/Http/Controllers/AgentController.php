@@ -44,10 +44,10 @@ class AgentController extends Controller
             'divisi' => 'required|string',
             'status' => 'required|string',
         ],[
-            'nik.required' => 'Nomor Induk wajib diisi.',
-            'nama.required' => 'Nama wajib diisi.',
-            'divisi.required' => 'Divisi wajib dipilih.',
-            'status.required' => 'Status wajib dipilih.',
+            'nik.required' => 'Kolom nik tidak boleh kosong!.',
+            'nama.required' => 'Kolom nama tidak boleh kosong!.',
+            'divisi.required' => 'Kolom tidak boleh kosong!.',
+            'status.required' => 'Kolum tidak boleh kosong!.',
         ]);
 
         $agent = new Agent();
