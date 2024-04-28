@@ -74,11 +74,23 @@
                                                                                 <a href="" class="dropdown-item">
                                                                                     <i class="fas fa-trash-o mr-2"></i>hapus
                                                                                 </a>
+                                                                                <a href="/detailticket/{{ $ticket->id }}/show"
+                                                                                    class="dropdown-item">
+                                                                                    <i
+                                                                                        class="fas fa-file-text-o mr-2"></i>Detail
+                                                                                    ticket
+                                                                                </a>
                                                                             @elseif($ticket->status === 'Onprocess')
                                                                                 <a class="dropdown-item" href="{{ route('detailticket.lanjut2', ['ticket_id' => $ticket->id]) }}">
                                                                                     <i class="fas fa-pencil-square-o mr-2"></i>Lanjutkan
                                                                                 </a>
-                                                                            @elseif($ticket->status === 'Finished')
+                                                                                <a href="/detailticket/{{ $ticket->id }}/show"
+                                                                                    class="dropdown-item">
+                                                                                    <i
+                                                                                        class="fas fa-file-text-o mr-2"></i>Detail
+                                                                                    ticket
+                                                                                </a>
+                                                                            @elseif($ticket->status === 'Finished' || 'Ressolved')
                                                                                 <a href="/detailticket/{{ $ticket->id }}/show"
                                                                                     class="dropdown-item">
                                                                                     <i

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\Client;
+use App\Models\Detailticket;
 use App\Models\Lokasi;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TicketController extends Controller
 {
@@ -96,7 +98,12 @@ class TicketController extends Controller
 
     public function resolveTicket($ticket_id)
     {
+        $now = Carbon::now();
         $ticket = Ticket::findOrFail($ticket_id);
+        $detail = Detailticket::where('ticket_id',$ticket->id)->first();
+        $detail->update([
+            'solved_time' => $now,
+        ]);
         $ticket->update([
             'status' => 'Resolved'
         ]);
@@ -114,7 +121,13 @@ class TicketController extends Controller
 
     public function Pending($ticket_id)
     {
+        $now = Carbon::now();
         $ticket = Ticket::findOrFail($ticket_id);
+        $detail = Detailticket::where('ticket_id','=',$ticket_id)->first();
+        $detail->update([
+            'pending_at' => $now,
+            'process_at' => ''
+        ]);
         $ticket->update([
             'status' => 'Pending'
         ]);

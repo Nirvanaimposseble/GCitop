@@ -13,6 +13,10 @@ class Detailticket extends Model
         'biaya',
         'saran',
         'jenis',
+        'solved_time',
+        'pending_time',
+        'pending_at',
+        'process_at',
         'ssubkategori',
         'ticket_id'
     ];

@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\Kategoriticket;
 use App\Models\Subkategori;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DetailticketController extends Controller
 {
@@ -23,8 +24,21 @@ class DetailticketController extends Controller
         $client = Client::findOrFail($ticket->client_id);
         $asset = Asset::findOrFail($ticket->asset_id);
         $detailticket = Detailticket::where('ticket_id', $ticket_id)->get();
+        $details = Detailticket::where('ticket_id', $ticket_id)->first();
+        if (is_string($details->solved_time)) {
+            $details->solved_time = Carbon::parse($details->solved_time);
+        }
 
-        return view('home.detailticket.index', compact('detailticket', 'client', 'ticket', 'asset'));
+        if (is_string($details->process_at)) {
+            $details->process_at = Carbon::parse($details->process_at);
+        }
+
+        if ($details->solved_time === null) {
+            return view('home.detailticket.show', compact( 'detailticket', 'client', 'ticket', 'asset'));
+        } else {
+            $est = $details->solved_time->diffInMinutes($details->process_at);
+            return view('home.detailticket.show', compact('est', 'detailticket', 'client', 'ticket', 'asset'));
+        }
     }
     public function assign($id)
     {
@@ -32,7 +46,7 @@ class DetailticketController extends Controller
         $ticket->update([
             'status' => 'Assign'
         ]);
-        return redirect()->back()->with('success','data berhasil di assign!');
+        return redirect()->back()->with('success', 'data berhasil di assign!');
     }
 
 
@@ -47,6 +61,7 @@ class DetailticketController extends Controller
         $client = Client::where('id', $ticket->client_id)->first();
         $asset = Asset::where('id', $ticket->asset_id)->first();
         $detailtickets = Detailticket::where('ticket_id', $id)->get();
+        $details = Detailticket::where('ticket_id', $id)->first();
 
         $kategoriticket = Kategoriticket::all();
         $subkategori = Subkategori::all();
@@ -63,6 +78,10 @@ class DetailticketController extends Controller
             'kategoriticket' => $kategoriticket,
             'subkategori' => $subkategori,
         ]);
+
+        // $details->update([
+        //'process_at' => $now
+        // ]);
     }
 
     public function Lanjut2($id)
@@ -97,13 +116,14 @@ class DetailticketController extends Controller
      */
     public function store(Request $request)
     {
+        $now = Carbon::now();
         $request->validate([
             'kkategoriticket' => 'required',
             'biaya' => 'required|numeric',
             'ssubkategori' => 'required',
             'saran' => 'required|string|max:255',
             'jenis' => 'required',
-        ],[
+        ], [
             'kkategoriticket.required' => 'Kategori ticket tidak boleh kosong!',
             'biaya.required' => 'Biaya tidak boleh kosong!',
             'saran.required' => 'Saran tidak boleh kosong!',
@@ -122,13 +142,16 @@ class DetailticketController extends Controller
             'ssubkategori' => $request->ssubkategori,
             'saran' => $request->saran,
             'jenis' => $request->jenis,
+            'pending_at' => '',
+            'pending_time' => '',
+            'process_at' => $now
         ]);
 
         $detail->update([
             'status' => 'Onprocess'
         ]);
 
-        return redirect('/detailticket/'.$ticket_id)->with('success','Data berhasil disimpan');
+        return redirect('/detailticket/' . $ticket_id)->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -143,8 +166,24 @@ class DetailticketController extends Controller
         $client = Client::findOrFail($ticket->client_id);
         $asset = Asset::findOrFail($ticket->asset_id);
         $detailticket = Detailticket::where('ticket_id', $ticket_id)->get();
+        $details = Detailticket::where('ticket_id', $ticket_id)->first();
 
-        return view('home.detailticket.show', compact('detailticket', 'client', 'ticket', 'asset'));
+        if (is_string($details->solved_time)) {
+            $details->solved_time = Carbon::parse($details->solved_time);
+        }
+
+        if (is_string($details->process_at)) {
+            $details->process_at = Carbon::parse($details->process_at);
+        }
+
+        if ($details->solved_time === null) {
+            return view('home.detailticket.show', compact( 'detailticket', 'client', 'ticket', 'asset'));
+        } else {
+            $est = $details->solved_time->diffInMinutes($details->process_at);
+            return view('home.detailticket.show', compact('est', 'detailticket', 'client', 'ticket', 'asset'));
+        }
+
+
     }
 
 

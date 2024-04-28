@@ -21,10 +21,10 @@ return new class extends Migration
             $table->decimal('biaya',10,3);
             $table->string('saran');
             $table->string('jenis');
-            $table->date('process_at')->nullable();
-            $table->date('pending_at')->nullable();
-            $table->bigInteger('pending_time')->nullable();
-            $table->bigInteger('solved_time')->nullable();
+            $table->string('process_at')->nullable();
+            $table->string('pending_at')->nullable();
+            $table->string('pending_time')->nullable();
+            $table->string('solved_time')->nullable();
             $table->timestamps();
         });
     }
