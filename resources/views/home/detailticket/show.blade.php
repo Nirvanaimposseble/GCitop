@@ -146,7 +146,7 @@
                                             <a href="/ticket" class="btn btn-primary">
                                                 <i class="fas fa-mail-reply mr-2"></i> &nbsp; Kembali
                                             </a>
-                                            @if ($ticket->status === 'resolved')
+                                            @if ($ticket->status === 'Resolved')
                                             <a href="{{ route('ticket.finished', ['ticket_id' => $ticket->id]) }}"
                                                 class="btn btn-success">
                                                 <i class="fas fa-check mr-2"></i>Finished
